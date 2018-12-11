@@ -37,8 +37,8 @@ def similarArtistOne(user_input_artist, cityId):
 
             # the similar artists
             similarResults = similarInfo['Similar']['Results']
-            
-            if len(similarResults) != 0:
+          
+            if len(similarResults) > 5:
                 # may have multiple similar artists
                 for i, element in enumerate(similarResults):
                     similarArtist = similarResults[i]['Name']
@@ -50,10 +50,10 @@ def similarArtistOne(user_input_artist, cityId):
                     # dbname = 'artist_local.db'
                     dbname = 'artist_remote.db'
                     insertDbSimilar(dbname, artistName, similarArtist, wikiUrl, wikiTeaser, yUrl)
-                    
+                   
                     # check if the similar artists have any upcoming events
                     similarArtist_new = getSimilarEvent(similarArtist, cityId)
-                    
+                       
                     if similarArtist_new not in similarArtistList_with_event:
                         similarArtistList_with_event.append(similarArtist_new)
                 
@@ -65,7 +65,7 @@ def similarArtistOne(user_input_artist, cityId):
                 print('Oops, you have a minority taste! We do not have any recommendations for ' + user_input_artist + ' right now.')
 
         except:
-            None
+            pass
     else:
         print('Oops, you have a minority taste! We do not have any recommendations right now.')
 
@@ -183,7 +183,7 @@ def createTable():
     conn = sqlite3.connect('artist_remote.db')
     cur = conn.cursor()
 
-    # cur.execute('DROP TABLE IF EXISTS Similars ')
+    cur.execute('DROP TABLE IF EXISTS Similars ')
     cur.execute('CREATE TABLE Similars \
         (artist_name TEXT, \
         similar_artist TEXT, \

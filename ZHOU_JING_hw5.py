@@ -53,8 +53,8 @@ def start():
             user_input = input('Choose a city above: ', )
             keylist = list(citylinks.keys())
             if user_input in keylist:
+
                 cityId = getCityID(user_input, 'artist_local.db')
-                #cityId = getCityID(user_input, 'artist_remote.db')
 
                 print('please wait...it is looking for all the artists who have the upcoming events in ' + user_input)
                 
@@ -96,6 +96,7 @@ def start():
 
                         if similarArtistList_with_event is None:
                             continue
+                            
                         else:
                             for similarArtist in similarArtistList_with_event:
                                 print(similarArtist)
@@ -104,13 +105,16 @@ def start():
                             print('Those who end with star key have the upcoming events.')                  
                             print('P.S. all the data have been saved to database.')
                             break
+
+                            
                     else:
                         print('Oops, please choose the artist again.')
-                        continue
+                        continue   
                 break
             else: 
                 print('Oops, please choose the city again.')
                 continue
+            break
 
     # CMD: python ZHOU_JING_hw5.py -source=local
     elif source == 'local':
@@ -173,6 +177,7 @@ def start():
             else: 
                 print('Oops, please choose the city again.')
                 continue
+            
 
     else: 
         print("invalid input!")

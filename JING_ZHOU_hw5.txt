@@ -97,14 +97,16 @@ After that, when the user choose the artist, the recommendation result will dire
 
 \f0\b \cf2 3. Anything else you feel is relevant to the grading of your project. 
 \f1\b0 \
-Not yet\
+The retrieve of local data need a large amount of data, since user can choose from 30 cities, every city has over 100 artists and every artist has several similar recommendations. That means if run locally based on the last remote run, it will wait for a long time. So when run locally, I use the local database(
+\f2\i artist_local.db
+\f1\i0 ) which has saved much data.\
 
 \f0\b 4. What did you set out to study? (i.e. what was the point of your project? This should be close to your HW3 assignment, but if you switched gears or changed things, note it here.) \
 \pard\pardeftab720\sl264\slmult1\partightenfactor0
 
 \f1\b0 \cf2 As noted in HW3, by using the web scraper script, I get the list of artists who have upcoming music events chronologically in different cities. Then I use these data to access the Bandsintown API, TasteDive API and Youtube API so the events details including tickets, venues as well as the information of similar artists or music recommendation are available. Finally, I create a web page(
-\f2\i Visualization folder
-\f1\i0 ) for the recommendation to display the retrieved data, e.g. artists recommendation results, youtube links.\
+\f2\i index.html
+\f1\i0  in Visualization folder) for the recommendation to display the retrieved data, e.g. artists recommendation results, youtube links.\
 \
 \pard\pardeftab720\sa320\partightenfactor0
 
@@ -112,7 +114,7 @@ Not yet\
 \f1\b0 \
 \pard\pardeftab720\sl264\slmult1\partightenfactor0
 \cf2 I found several fun facts when viewing the data in my local database. \
-For example, on average, an artist have 8 events within half year, some artists and bands(e.g. Celtic Woman) even have over 70 concerts. Also, the top 4 artists who have the most trackers in Bandsintown website are all rock bands and Mariah Carey is the only female in top 10. \
+For example, on average, an artist have 8 events within half year, some artists and bands(e.g. Celtic Woman) even have over 70 concerts. Also, the top 4 artists who have the most trackers in Bandsintown website are all rock bands or artists and Mariah Carey is the only female in top 10. \
 \
 \pard\pardeftab720\sa320\partightenfactor0
 
@@ -120,6 +122,7 @@ For example, on average, an artist have 8 events within half year, some artists 
 \f1\b0 \
 \pard\pardeftab720\sl264\slmult1\partightenfactor0
 \cf2 At the beginning, I do not have a deep understanding about modules and functions when building a project. So I just put everything in several main functions and some codes are almost duplicated. When it comes to debugging, it always costs me much time because there are too many nested functions. \
+Also, when working on the visualization(the website), I learned for some time for how to show the data that my python script has got or retrieved it from database. \
 \
 \pard\pardeftab720\sa320\partightenfactor0
 
@@ -133,7 +136,7 @@ For example, on average, an artist have 8 events within half year, some artists 
 \f0\b \cf2 8. What would you do \'93next\'94 to expand or augment the project?\
 \pard\pardeftab720\sl264\slmult1\partightenfactor0
 
-\f1\b0 \cf2 Right now I have a large amount of data about artists and events, but I did not analyze them throughly or systematically. I will continue to work on it to analyze the data including the ticket prices, etc. and present them with visualization tools like Tableau and add the results into my web page.\
+\f1\b0 \cf2 Right now I have a large amount of data about artists and events, but I did not analyze them throughly or systematically. I will continue to work on it to analyze the data including the ticket prices, cities, etc. and present them with visualization tools like Tableau and add the results into my web page.\
 \pard\pardeftab720\sa320\partightenfactor0
 
 \f0\b \cf2 \
