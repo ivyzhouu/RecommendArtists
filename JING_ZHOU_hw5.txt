@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf100
+{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 Times-Italic;
+\f3\fnil\fcharset134 STSongti-SC-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww14160\viewh15600\viewkind0
+\deftab720
+\pard\pardeftab720\sl288\slmult1\partightenfactor0
+
+\f0\b\fs36 \cf2 \expnd0\expndtw0\kerning0
+Final Project 
+\fs30 \
+
+\f1\b0\fs28 Jing Zhou, Dec 10
+\f0\b\fs30 \
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \
+1. What are the strengths of your data modeling format?
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 The data modeling is composed of five tables, that is Cities, Artists, Events, Tickets and Venues. Tickets and Venues are logically connected with Events through primary key(event_id). Also, Cities , Events and Artists are connected by keys(city_id and event_id) since an artist may have multiple events in multiple cities.\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \uc0\u8232 
+\f0\b 2. What are the weaknesses? (Does your data model support sorting the information? Re-ordering it? Only obtaining a certain subset of the information?)
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 The weakness of my project up till now may happen to the data I get from the TasteDrive API because they have not been nicely stored into the database after I get the response JSON files. I will try to create a new table for it separately and connect it with Artists, Events and Tickets tables.\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \uc0\u8232 
+\f0\b 3. How do you store your data on disk?
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 I stored them in two database(artist_local.db and artist_remote.db) with five tables and several attributes using sqlite3. \
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \uc0\u8232 
+\f0\b 4. Let\'92s say you find another data source that relates to all 3 of your data sources (i.e. a data source that relates to your existing data). How would you extend your model to include this new data source? How would that change the interface? 
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 I may find another data source from Youtube, I mean, when the users search for the similar artists or music, I will not only give them some similar artists as recommendations but also give a link to a related Youtube video and it will display on my web page.(I will do the visualization in hw6)\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b \cf2 5. How would you add a new attribute to your data (i.e. imagine you had a lat/long column in a database. You might use that to access an API to get a city name. How would you add city name to your data?) 
+\f1\b0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 When I run the web scraper from Songkick website, I will scrape the data of cities and return a city list. So I may add a new attribute called city_id to store the cities and connect it with the Artist, Cities and Events tables.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\partightenfactor0
+\cf2 \
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 1. How to run your code (what command-line switches they are, what happens when you invoke the code, etc.) 
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 If run remotely: \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+
+\f2\i \cf2 python ZHOU_JING_hw5.py -source=remote\
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+
+\f1\i0 \cf2 \
+Firstly, using the scraper(
+\f2\i songkickScraper.py
+\f1\i0 ) to get names and urls of 30 cities on the Songkick website and initialize the database to store them in the local SQlite DB.  \
+Then the script will retrieve the artists who have recent upcoming events and clean up the data.(remove the weird symbols, separate the multiple artists, etc.) For the user, he/she can input one of the cities and then get a list of artists who have the upcoming events in this city. \
+Next, the details about events, venues, tickets of artists can be retrieved with the Bandsintown API(
+\f2\i bandsintownAPI.py
+\f1\i0 ) and these data will all be saved into the database.\
+After that, user can choose an artist from the artists list above. With the Tastedive API(
+\f2\i tastediveAPI.py
+\f1\i0 ), the similar music or artists will be retrieved. Also, Bandsintown API will be used again to check if the similar artists also have the upcoming events in this city. A list of similar artists will finally be showed to the user and those similar artists who have the upcoming events will be marked with * at the end of their names.\
+\
+If run locally: \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+
+\f2\i \cf2 python ZHOU_JING_hw5.py -source=local
+\f1\i0 \
+\
+The data will be retrieved all from local SQlite database(
+\f2\i artist_local.db
+\f1\i0 ) through script(
+\f2\i getLocalData.py
+\f1\i0 ) at this time. The user also needs to choose a city and see a list of artists who have the upcoming events in the city. \
+After that, when the user choose the artist, the recommendation result will directly be returned if it is stored in the database
+\f3 .
+\f1  But if it has not been saved to the local database(since there are too many artists and similar artists in the world!), the user will be asked to decide if he/she wants to get the result from remote API. If Yes, just like the remote one, it will get the data from two APIs and save them to the database. If not, it just comes to the end of the program.\
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 2. Any major \'93gotchas\'94 to the code (i.e. things that don\'92t work, go slowly, could be improved, etc.) \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+
+\f1\b0 \cf2 It happened to me that when I run my work code to scrape and save a lot of data of artists and events for the later local run. It went really slow when inserting them into the local database because it has to check if the data are existed or not, which means it must traverse all the existed events(>10,000) and artists(>1,300) every time.\
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 3. Anything else you feel is relevant to the grading of your project. 
+\f1\b0 \
+Not yet\
+
+\f0\b 4. What did you set out to study? (i.e. what was the point of your project? This should be close to your HW3 assignment, but if you switched gears or changed things, note it here.) \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+
+\f1\b0 \cf2 As noted in HW3, by using the web scraper script, I get the list of artists who have upcoming music events chronologically in different cities. Then I use these data to access the Bandsintown API, TasteDive API and Youtube API so the events details including tickets, venues as well as the information of similar artists or music recommendation are available. Finally, I create a web page(
+\f2\i Visualization folder
+\f1\i0 ) for the recommendation to display the retrieved data, e.g. artists recommendation results, youtube links.\
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 5. What did you Discover/what were your conclusions (i.e. what were your findings? Were your original assumptions confirmed, etc.?) 
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 I found several fun facts when viewing the data in my local database. \
+For example, on average, an artist have 8 events within half year, some artists and bands(e.g. Celtic Woman) even have over 70 concerts. Also, the top 4 artists who have the most trackers in Bandsintown website are all rock bands and Mariah Carey is the only female in top 10. \
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 6. What difficulties did you have in completing the project? 
+\f1\b0 \
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 At the beginning, I do not have a deep understanding about modules and functions when building a project. So I just put everything in several main functions and some codes are almost duplicated. When it comes to debugging, it always costs me much time because there are too many nested functions. \
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 7. What skills did you wish you had while you were doing the project? 
+\f1\b0 \
+\pard\tx9634\pardeftab720\sl264\slmult1\partightenfactor0
+\cf2 I wished I could figure out my data structure more quickly and clearly because after I created it, I revised my data structure twice later(e.x. add a new table Cities, join the Artist, Cities and Events through event_id and city_id) and rebuilding it was really bothersome. So next time I will think twice about the data structure and data model(maybe draw a data model in PowerDesigner)\
+\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 8. What would you do \'93next\'94 to expand or augment the project?\
+\pard\pardeftab720\sl264\slmult1\partightenfactor0
+
+\f1\b0 \cf2 Right now I have a large amount of data about artists and events, but I did not analyze them throughly or systematically. I will continue to work on it to analyze the data including the ticket prices, etc. and present them with visualization tools like Tableau and add the results into my web page.\
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f0\b \cf2 \
+}
